@@ -11,7 +11,17 @@
 <a href="/" class="logo">Мой магазин</a>
 </div>
 <div id="subheader">
-<div class="cart">Корзина пустая.</div>
+<div class="cart">
+    {% with total_items=cart|length %}
+    {% if cart|length > 0 %}
+    В корзине:
+    <a href="{% url 'cart:cart_detail' %}">
+        {{ total_items }} шт., сумма {{ cart.get_total_price }} BYN
+    </a>
+    {% else %}
+    Корзина пустая.</div>
+    {% endif %}
+    {% endwith %}
 </div>
 <div id="content">
 {% block content %}{% endblock %}
